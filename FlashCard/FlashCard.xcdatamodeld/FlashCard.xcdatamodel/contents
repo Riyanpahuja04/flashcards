@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Deck" representedClassName="Deck" syncable="YES">
+        <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="firestoreID" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isUserCreated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isUserSaved" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="topicID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="flashcards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FlashCard" inverseName="deck" inverseEntity="FlashCard"/>
+        <relationship name="topic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Topic" inverseName="decks" inverseEntity="Topic"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="FlashCard" representedClassName="FlashCard" syncable="YES">
+        <attribute name="backText" optional="YES" attributeType="String"/>
+        <attribute name="createdDate" optional="YES" attributeType="String"/>
+        <attribute name="deckID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="firestoreID" optional="YES" attributeType="String"/>
+        <attribute name="frontText" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="deck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Deck" inverseName="flashcards" inverseEntity="Deck"/>
+        <fetchedProperty name="fetchedProperty" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="FlashCard"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Topic" representedClassName="Topic" syncable="YES">
+        <attribute name="descriptionText" optional="YES" attributeType="String"/>
+        <attribute name="firestoreID" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isUserCreated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="decks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Deck" inverseName="topic" inverseEntity="Deck"/>
+    </entity>
 </model>

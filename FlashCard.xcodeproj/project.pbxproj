@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B308A8352CB94B1F008A8534 /* FireStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A8342CB94B1F008A8534 /* FireStoreManager.swift */; };
+		B308A8372CB96097008A8534 /* DeckDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A8362CB96097008A8534 /* DeckDetailView.swift */; };
+		B308A8392CB96106008A8534 /* Deck+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A8382CB96106008A8534 /* Deck+Helpers.swift */; };
+		B308A83B2CB96133008A8534 /* AddFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A83A2CB96133008A8534 /* AddFlashCardView.swift */; };
+		B308A83D2CB961DE008A8534 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A83C2CB961DE008A8534 /* CoreDataStack.swift */; };
+		B308A83F2CBA9E3E008A8534 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B308A83E2CBA9E3E008A8534 /* GoogleService-Info.plist */; };
 		B38F718A2CB9386B0034DC56 /* FlashCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71892CB9386B0034DC56 /* FlashCardApp.swift */; };
 		B38F718C2CB9386B0034DC56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F718B2CB9386B0034DC56 /* ContentView.swift */; };
 		B38F718E2CB9386C0034DC56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38F718D2CB9386C0034DC56 /* Assets.xcassets */; };
 		B38F71912CB9386C0034DC56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38F71902CB9386C0034DC56 /* Preview Assets.xcassets */; };
 		B38F71932CB9386C0034DC56 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71922CB9386C0034DC56 /* Persistence.swift */; };
 		B38F71962CB9386C0034DC56 /* FlashCard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B38F71942CB9386C0034DC56 /* FlashCard.xcdatamodeld */; };
-		B38F71A02CB938B40034DC56 /* card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F719F2CB938B40034DC56 /* card.swift */; };
 		B38F71A32CB93A910034DC56 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71A22CB93A910034DC56 /* FirebaseAnalytics */; };
 		B38F71A52CB93A910034DC56 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71A42CB93A910034DC56 /* FirebaseAnalyticsOnDeviceConversion */; };
 		B38F71A72CB93A910034DC56 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71A62CB93A910034DC56 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -38,11 +43,22 @@
 		B38F71CD2CB93A910034DC56 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71CC2CB93A910034DC56 /* FirebaseStorage */; };
 		B38F71CF2CB93A910034DC56 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71CE2CB93A910034DC56 /* FirebaseStorageCombine-Community */; };
 		B38F71D12CB93A910034DC56 /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = B38F71D02CB93A910034DC56 /* FirebaseVertexAI-Preview */; };
-		B38F71D32CB93AC50034DC56 /* deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71D22CB93AC50034DC56 /* deck.swift */; };
-		B38F71D52CB93ADD0034DC56 /* flashcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71D42CB93ADD0034DC56 /* flashcard.swift */; };
+		B38F71E82CB9415F0034DC56 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E22CB9415F0034DC56 /* Deck+CoreDataClass.swift */; };
+		B38F71E92CB9415F0034DC56 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E32CB9415F0034DC56 /* Deck+CoreDataProperties.swift */; };
+		B38F71EA2CB9415F0034DC56 /* Topic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E42CB9415F0034DC56 /* Topic+CoreDataClass.swift */; };
+		B38F71EB2CB9415F0034DC56 /* Topic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E52CB9415F0034DC56 /* Topic+CoreDataProperties.swift */; };
+		B38F71EC2CB9415F0034DC56 /* FlashCard+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E62CB9415F0034DC56 /* FlashCard+CoreDataClass.swift */; };
+		B38F71ED2CB9415F0034DC56 /* FlashCard+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71E72CB9415F0034DC56 /* FlashCard+CoreDataProperties.swift */; };
+		B38F71EF2CB943640034DC56 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71EE2CB943640034DC56 /* HomePageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B308A8342CB94B1F008A8534 /* FireStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreManager.swift; sourceTree = "<group>"; };
+		B308A8362CB96097008A8534 /* DeckDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDetailView.swift; sourceTree = "<group>"; };
+		B308A8382CB96106008A8534 /* Deck+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+Helpers.swift"; sourceTree = "<group>"; };
+		B308A83A2CB96133008A8534 /* AddFlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlashCardView.swift; sourceTree = "<group>"; };
+		B308A83C2CB961DE008A8534 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B308A83E2CBA9E3E008A8534 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B38F71862CB9386B0034DC56 /* FlashCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38F71892CB9386B0034DC56 /* FlashCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardApp.swift; sourceTree = "<group>"; };
 		B38F718B2CB9386B0034DC56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,9 +66,13 @@
 		B38F71902CB9386C0034DC56 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B38F71922CB9386C0034DC56 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		B38F71952CB9386C0034DC56 /* FlashCard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FlashCard.xcdatamodel; sourceTree = "<group>"; };
-		B38F719F2CB938B40034DC56 /* card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = card.swift; sourceTree = "<group>"; };
-		B38F71D22CB93AC50034DC56 /* deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deck.swift; sourceTree = "<group>"; };
-		B38F71D42CB93ADD0034DC56 /* flashcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcard.swift; sourceTree = "<group>"; };
+		B38F71E22CB9415F0034DC56 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B38F71E32CB9415F0034DC56 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B38F71E42CB9415F0034DC56 /* Topic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Topic+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B38F71E52CB9415F0034DC56 /* Topic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Topic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B38F71E62CB9415F0034DC56 /* FlashCard+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlashCard+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B38F71E72CB9415F0034DC56 /* FlashCard+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlashCard+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B38F71EE2CB943640034DC56 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +129,7 @@
 		B38F71882CB9386B0034DC56 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				B308A83E2CBA9E3E008A8534 /* GoogleService-Info.plist */,
 				B38F719E2CB938A20034DC56 /* viewmodel */,
 				B38F719D2CB938960034DC56 /* view */,
 				B38F719C2CB9388D0034DC56 /* model */,
@@ -118,6 +139,7 @@
 				B38F71922CB9386C0034DC56 /* Persistence.swift */,
 				B38F71942CB9386C0034DC56 /* FlashCard.xcdatamodeld */,
 				B38F718F2CB9386C0034DC56 /* Preview Content */,
+				B308A83C2CB961DE008A8534 /* CoreDataStack.swift */,
 			);
 			path = FlashCard;
 			sourceTree = "<group>";
@@ -133,9 +155,13 @@
 		B38F719C2CB9388D0034DC56 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				B38F719F2CB938B40034DC56 /* card.swift */,
-				B38F71D22CB93AC50034DC56 /* deck.swift */,
-				B38F71D42CB93ADD0034DC56 /* flashcard.swift */,
+				B38F71E22CB9415F0034DC56 /* Deck+CoreDataClass.swift */,
+				B38F71E32CB9415F0034DC56 /* Deck+CoreDataProperties.swift */,
+				B38F71E42CB9415F0034DC56 /* Topic+CoreDataClass.swift */,
+				B38F71E52CB9415F0034DC56 /* Topic+CoreDataProperties.swift */,
+				B38F71E62CB9415F0034DC56 /* FlashCard+CoreDataClass.swift */,
+				B38F71E72CB9415F0034DC56 /* FlashCard+CoreDataProperties.swift */,
+				B308A8382CB96106008A8534 /* Deck+Helpers.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -143,6 +169,9 @@
 		B38F719D2CB938960034DC56 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				B38F71EE2CB943640034DC56 /* HomePageView.swift */,
+				B308A8362CB96097008A8534 /* DeckDetailView.swift */,
+				B308A83A2CB96133008A8534 /* AddFlashCardView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -150,6 +179,7 @@
 		B38F719E2CB938A20034DC56 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
+				B308A8342CB94B1F008A8534 /* FireStoreManager.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -243,6 +273,7 @@
 			files = (
 				B38F71912CB9386C0034DC56 /* Preview Assets.xcassets in Resources */,
 				B38F718E2CB9386C0034DC56 /* Assets.xcassets in Resources */,
+				B308A83F2CBA9E3E008A8534 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,13 +284,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B38F71D52CB93ADD0034DC56 /* flashcard.swift in Sources */,
+				B308A83B2CB96133008A8534 /* AddFlashCardView.swift in Sources */,
 				B38F71932CB9386C0034DC56 /* Persistence.swift in Sources */,
 				B38F718C2CB9386B0034DC56 /* ContentView.swift in Sources */,
-				B38F71D32CB93AC50034DC56 /* deck.swift in Sources */,
+				B38F71ED2CB9415F0034DC56 /* FlashCard+CoreDataProperties.swift in Sources */,
+				B308A8352CB94B1F008A8534 /* FireStoreManager.swift in Sources */,
+				B308A8372CB96097008A8534 /* DeckDetailView.swift in Sources */,
+				B38F71EC2CB9415F0034DC56 /* FlashCard+CoreDataClass.swift in Sources */,
+				B308A83D2CB961DE008A8534 /* CoreDataStack.swift in Sources */,
 				B38F71962CB9386C0034DC56 /* FlashCard.xcdatamodeld in Sources */,
-				B38F71A02CB938B40034DC56 /* card.swift in Sources */,
+				B38F71EB2CB9415F0034DC56 /* Topic+CoreDataProperties.swift in Sources */,
+				B38F71EA2CB9415F0034DC56 /* Topic+CoreDataClass.swift in Sources */,
+				B38F71E82CB9415F0034DC56 /* Deck+CoreDataClass.swift in Sources */,
+				B38F71E92CB9415F0034DC56 /* Deck+CoreDataProperties.swift in Sources */,
 				B38F718A2CB9386B0034DC56 /* FlashCardApp.swift in Sources */,
+				B308A8392CB96106008A8534 /* Deck+Helpers.swift in Sources */,
+				B38F71EF2CB943640034DC56 /* HomePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
