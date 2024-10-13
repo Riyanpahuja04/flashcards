@@ -2,6 +2,9 @@
 
 A flashcard application for iOS that helps users create, save, and study flashcard decks. Users can create their own decks, save decks from the marketplace, and study individual flashcards. The app uses **Core Data** for local storage and **Firebase Firestore** for cloud-based marketplace decks.
 
+# Github link:
+https://github.com/Riyanpahuja04/flashcards.git
+
 ## Features
 
 - **Create Decks**: Users can create custom flashcard decks locally.
