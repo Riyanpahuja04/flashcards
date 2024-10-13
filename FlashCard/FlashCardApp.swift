@@ -22,10 +22,8 @@ struct FlashCardApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
                 HomePageView()
-            }
-            .environment(\.managedObjectContext, persistenceController.context)
+                    .environment(\.managedObjectContext, persistenceController.context)
         }
     }
 }

@@ -14,7 +14,8 @@ struct DeckDetailView: View {
     @State private var showAddFlashcardView = false
     @State private var showEditFlashcardView = false
     @State private var selectedFlashcard: FlashCard? = nil
-
+    @State private var navigateToStudy: Bool = false
+    
     var body: some View {
         VStack {
             // Deck details section
@@ -28,7 +29,7 @@ struct DeckDetailView: View {
                     .foregroundColor(.secondary)
             }
             .padding()
-
+            
             // List of flashcards in the deck
             List {
                 ForEach(deck.flashcardsArray, id: \.id) { flashcard in
@@ -46,7 +47,7 @@ struct DeckDetailView: View {
                                 .foregroundColor(.blue)
                         }
                         .buttonStyle(BorderlessButtonStyle())
-
+                        
                         Button(action: {
                             deleteFlashcard(flashcard: flashcard)
                         }) {
@@ -59,7 +60,7 @@ struct DeckDetailView: View {
                 .onDelete(perform: deleteFlashcard)
             }
             .listStyle(InsetGroupedListStyle())
-
+            
             // Button to add a new flashcard
             Button(action: {
                 showAddFlashcardView = true
@@ -75,10 +76,11 @@ struct DeckDetailView: View {
             .sheet(isPresented: $showAddFlashcardView) {
                 AddFlashcardView(deck: deck)
             }
-
+            
             // Button to start studying the deck
             Button(action: {
                 // Navigation logic to study view will go here
+                navigateToStudy = true
             }) {
                 Text("Start Studying")
                     .frame(maxWidth: .infinity)
@@ -93,8 +95,12 @@ struct DeckDetailView: View {
         .sheet(item: $selectedFlashcard) { flashcard in
             EditFlashcardView(flashcard: flashcard)
         }
+        .background(
+            NavigationLink(destination: FlashcardStudyView(flashcards: deck.flashcardsArray), isActive: $navigateToStudy) {
+                EmptyView()
+            })
     }
-
+    
     // Function to delete a flashcard
     private func deleteFlashcard(at offsets: IndexSet) {
         withAnimation {
@@ -103,14 +109,14 @@ struct DeckDetailView: View {
             saveContext()
         }
     }
-
+    
     // Function to delete a specific flashcard
     private func deleteFlashcard(flashcard: FlashCard) {
         let context = CoreDataStack.shared.context
         context.delete(flashcard)
         saveContext()
     }
-
+    
     // Save context function for Core Data
     private func saveContext() {
         let context = CoreDataStack.shared.context

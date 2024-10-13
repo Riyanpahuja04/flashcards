@@ -13,6 +13,7 @@
 		B308A83B2CB96133008A8534 /* AddFlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A83A2CB96133008A8534 /* AddFlashCardView.swift */; };
 		B308A83D2CB961DE008A8534 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A83C2CB961DE008A8534 /* CoreDataStack.swift */; };
 		B308A83F2CBA9E3E008A8534 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B308A83E2CBA9E3E008A8534 /* GoogleService-Info.plist */; };
+		B308A8412CBBE294008A8534 /* FlashCardStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B308A8402CBBE294008A8534 /* FlashCardStudyView.swift */; };
 		B38F718A2CB9386B0034DC56 /* FlashCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F71892CB9386B0034DC56 /* FlashCardApp.swift */; };
 		B38F718C2CB9386B0034DC56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F718B2CB9386B0034DC56 /* ContentView.swift */; };
 		B38F718E2CB9386C0034DC56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38F718D2CB9386C0034DC56 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		B308A83A2CB96133008A8534 /* AddFlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlashCardView.swift; sourceTree = "<group>"; };
 		B308A83C2CB961DE008A8534 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B308A83E2CBA9E3E008A8534 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B308A8402CBBE294008A8534 /* FlashCardStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardStudyView.swift; sourceTree = "<group>"; };
 		B38F71862CB9386B0034DC56 /* FlashCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38F71892CB9386B0034DC56 /* FlashCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardApp.swift; sourceTree = "<group>"; };
 		B38F718B2CB9386B0034DC56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				B38F71EE2CB943640034DC56 /* HomePageView.swift */,
 				B308A8362CB96097008A8534 /* DeckDetailView.swift */,
 				B308A83A2CB96133008A8534 /* AddFlashCardView.swift */,
+				B308A8402CBBE294008A8534 /* FlashCardStudyView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				B38F71EC2CB9415F0034DC56 /* FlashCard+CoreDataClass.swift in Sources */,
 				B308A83D2CB961DE008A8534 /* CoreDataStack.swift in Sources */,
 				B38F71962CB9386C0034DC56 /* FlashCard.xcdatamodeld in Sources */,
+				B308A8412CBBE294008A8534 /* FlashCardStudyView.swift in Sources */,
 				B38F71EB2CB9415F0034DC56 /* Topic+CoreDataProperties.swift in Sources */,
 				B38F71EA2CB9415F0034DC56 /* Topic+CoreDataClass.swift in Sources */,
 				B38F71E82CB9415F0034DC56 /* Deck+CoreDataClass.swift in Sources */,

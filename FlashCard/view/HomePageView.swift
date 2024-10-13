@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import FirebaseFirestore
 // Main view for the homepage
 struct HomePageView: View {
     // Enum for tab selection
@@ -59,12 +60,10 @@ struct YourDecksView: View {
         .navigationTitle("Your Decks")
     }
 }
-// Placeholder view for "Market Place" tab
-import SwiftUI
 
 struct MarketPlaceView: View {
-    // Firestore manager to handle fetching decks
     @ObservedObject private var firestoreManager = FirestoreManager()
+    @State private var savedDecks = Set<String>()  // Keep track of saved deck IDs
     
     var body: some View {
         List(firestoreManager.marketPlaceDecks) { deck in
@@ -79,11 +78,12 @@ struct MarketPlaceView: View {
                 
                 Spacer()
                 
+                // Bookmark button, changing color based on saved state
                 Button(action: {
-                    saveDeckToLocal(deck: deck)
+                    toggleSaveDeck(deck: deck)
                 }) {
-                    Image(systemName: "bookmark")
-                        .foregroundColor(.blue)
+                    Image(systemName: savedDecks.contains(deck.id) ? "bookmark.fill" : "bookmark")
+                        .foregroundColor(savedDecks.contains(deck.id) ? .blue : .gray)
                 }
             }
         }
@@ -93,7 +93,20 @@ struct MarketPlaceView: View {
         .navigationTitle("Market Place")
     }
     
-    // Function to save market place deck to local Core Data
+    // Toggle the saved state of the deck
+    private func toggleSaveDeck(deck: DeckDataModel) {
+        if savedDecks.contains(deck.id) {
+            // If already saved, remove it from saved decks
+            savedDecks.remove(deck.id)
+            removeDeckFromLocal(deck: deck)
+        } else {
+            // If not saved, add it to saved decks
+            savedDecks.insert(deck.id)
+            saveDeckToLocal(deck: deck)
+        }
+    }
+    
+    // Save the deck to local storage (Core Data, Firebase, etc.)
     private func saveDeckToLocal(deck: DeckDataModel) {
         let context = CoreDataStack.shared.context
         let newDeck = Deck(context: context)
@@ -105,8 +118,27 @@ struct MarketPlaceView: View {
         
         do {
             try context.save()
+            print("Deck saved successfully")
         } catch {
             print("Failed to save deck: \(error)")
+        }
+    }
+    
+    // Remove the deck from saved decks (if unsaved)
+    private func removeDeckFromLocal(deck: DeckDataModel) {
+        let context = CoreDataStack.shared.context
+        let fetchRequest: NSFetchRequest<Deck> = Deck.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", deck.id)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let deckToDelete = results.first {
+                context.delete(deckToDelete)
+                try context.save()
+                print("Deck removed from saved decks")
+            }
+        } catch {
+            print("Failed to remove deck: \(error)")
         }
     }
 }
