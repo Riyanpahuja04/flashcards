@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct FlashcardStudyView: View {
-    var flashcards: [FlashCard]  // List of flashcards to study
-    @State private var currentIndex = 0  // Track the current flashcard
-    @State private var showBack = false  // Track if the card is flipped
+    var flashcards: [FlashcardDataModel]  // Pass the Firestore flashcards
+    @State private var currentIndex = 0
+    @State private var showBack = false
     
     var body: some View {
         VStack {
@@ -19,7 +19,7 @@ struct FlashcardStudyView: View {
                     .font(.headline)
             } else {
                 VStack {
-                    Text(showBack ? flashcards[currentIndex].backText ?? "Back" : flashcards[currentIndex].frontText ?? "Front")
+                    Text(showBack ? flashcards[currentIndex].backText : flashcards[currentIndex].frontText)
                         .font(.largeTitle)
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -64,24 +64,21 @@ struct FlashcardStudyView: View {
         .navigationTitle("Study Flashcards")
     }
     
-    // Flip the flashcard to show back/front
     private func flipFlashcard() {
         showBack.toggle()
     }
     
-    // Show the previous card
     private func showPreviousCard() {
         if currentIndex > 0 {
             currentIndex -= 1
-            showBack = false  // Reset to show front
+            showBack = false
         }
     }
     
-    // Show the next card
     private func showNextCard() {
         if currentIndex < flashcards.count - 1 {
             currentIndex += 1
-            showBack = false  // Reset to show front
+            showBack = false
         }
     }
 }

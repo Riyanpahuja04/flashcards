@@ -43,21 +43,61 @@ struct HomePageView: View {
 }
 
 // Placeholder view for "Your Decks" tab
+import SwiftUI
+import CoreData
+
 struct YourDecksView: View {
-    // Fetch Request to get decks stored in Core Data
+    @State var showCreateDeckView: Bool = false  // Binding to manage the create deck view
+
+    // Fetch user-generated or saved decks from Core Data
     @FetchRequest(
         entity: Deck.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Deck.name, ascending: true)],
-        predicate: NSPredicate(format: "isUserCreated == true OR isUserSaved == true") // Fetch user-created or saved decks
+        predicate: NSPredicate(format: "isUserCreated == true OR isUserSaved == true")
     ) var decks: FetchedResults<Deck>
     
     var body: some View {
-        List(decks, id: \.id) { deck in
-            NavigationLink(destination: DeckDetailView(deck: deck)) {
-                Text(deck.name ?? "Unnamed Deck")
+        VStack {
+            if decks.isEmpty {
+                Text("Create or save a deck from market place to view it here!")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
             }
+            List(decks, id: \.id) { deck in
+                NavigationLink(destination: DeckDetailView(deck: deck)) {
+                    VStack(alignment: .leading) {
+                        Text(deck.name ?? "Unnamed Deck")
+                            .font(.headline)
+                        Text(deck.descriptionText ?? "No description provided.")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            .navigationTitle("Your Decks")
+            
+            // "Create New Deck" button
+            Button(action: {
+                showCreateDeckView = true  // Show the create deck modal when tapped
+            }) {
+                Text("Create New Deck")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+            }
+                .sheet(isPresented: $showCreateDeckView) {
+                        CreateDeckView()  // Present the create deck view as a sheet
+                    }
         }
-        .navigationTitle("Your Decks")
     }
 }
 
@@ -110,20 +150,34 @@ struct MarketPlaceView: View {
     private func saveDeckToLocal(deck: DeckDataModel) {
         let context = CoreDataStack.shared.context
         let newDeck = Deck(context: context)
+        
+        // Save the deck data
         newDeck.id = UUID(uuidString: deck.id) ?? UUID()
         newDeck.name = deck.name
         newDeck.descriptionText = deck.description
         newDeck.isUserCreated = false
         newDeck.isUserSaved = true
+        print(deck.flashcards.isEmpty)
+        // Iterate over the flashcards and save them in Core Data
+        for flashcardData in deck.flashcards {
+            let newFlashcard = FlashCard(context: context)
+            newFlashcard.id = UUID(uuidString: flashcardData.id) ?? UUID()
+            newFlashcard.frontText = flashcardData.frontText
+            newFlashcard.backText = flashcardData.backText
+            newFlashcard.createdDate = DateFormatter().string(from: Date())
+            
+            // Link the flashcard to the deck
+            newFlashcard.deck = newDeck
+        }
         
+        // Save the context
         do {
             try context.save()
-            print("Deck saved successfully")
+            print("Deck and flashcards saved successfully")
         } catch {
-            print("Failed to save deck: \(error)")
+            print("Failed to save deck and flashcards: \(error)")
         }
     }
-    
     // Remove the deck from saved decks (if unsaved)
     private func removeDeckFromLocal(deck: DeckDataModel) {
         let context = CoreDataStack.shared.context

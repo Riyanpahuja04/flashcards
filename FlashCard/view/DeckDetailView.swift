@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-
 struct DeckDetailView: View {
     @ObservedObject var deck: Deck   // The deck object passed from the previous view
     
@@ -15,6 +14,20 @@ struct DeckDetailView: View {
     @State private var showEditFlashcardView = false
     @State private var selectedFlashcard: FlashCard? = nil
     @State private var navigateToStudy: Bool = false
+    
+    // Fetch the flashcards associated with the current deck
+    @FetchRequest private var flashcards: FetchedResults<FlashCard>
+    
+    init(deck: Deck) {
+        self.deck = deck
+        
+        // Initialize FetchRequest to fetch flashcards for the current deck
+        _flashcards = FetchRequest<FlashCard>(
+            entity: FlashCard.entity(),
+            sortDescriptors: [NSSortDescriptor(keyPath: \FlashCard.createdDate, ascending: true)],
+            predicate: NSPredicate(format: "deck == %@", deck)
+        )
+    }
     
     var body: some View {
         VStack {
@@ -32,13 +45,14 @@ struct DeckDetailView: View {
             
             // List of flashcards in the deck
             List {
-                ForEach(deck.flashcardsArray, id: \.id) { flashcard in
+                ForEach(flashcards, id: \.id) { flashcard in
                     HStack {
                         Text(flashcard.frontText ?? "No Text")
                             .font(.headline)
                         
                         Spacer()
                         
+                        // Edit button
                         Button(action: {
                             selectedFlashcard = flashcard
                             showEditFlashcardView = true
@@ -48,6 +62,7 @@ struct DeckDetailView: View {
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         
+                        // Delete button
                         Button(action: {
                             deleteFlashcard(flashcard: flashcard)
                         }) {
@@ -79,7 +94,11 @@ struct DeckDetailView: View {
             
             // Button to start studying the deck
             Button(action: {
-                // Navigation logic to study view will go here
+                print("Printing flash cards: \(flashcards.isEmpty)")
+                for flashcard in flashcards {
+                    print("Flashcard: \(flashcard.frontText ?? "No Front Text") - \(flashcard.backText ?? "No Back Text")")
+                }
+                
                 navigateToStudy = true
             }) {
                 Text("Start Studying")
@@ -96,18 +115,10 @@ struct DeckDetailView: View {
             EditFlashcardView(flashcard: flashcard)
         }
         .background(
-            NavigationLink(destination: FlashcardStudyView(flashcards: deck.flashcardsArray), isActive: $navigateToStudy) {
+            NavigationLink(destination: FlashcardStudyView(flashcards: flashcards.map { convertToFlashcardDataModel(flashcard: $0) }), isActive: $navigateToStudy) {
                 EmptyView()
-            })
-    }
-    
-    // Function to delete a flashcard
-    private func deleteFlashcard(at offsets: IndexSet) {
-        withAnimation {
-            let context = CoreDataStack.shared.context
-            offsets.map { deck.flashcardsArray[$0] }.forEach(context.delete)
-            saveContext()
-        }
+            }
+        )
     }
     
     // Function to delete a specific flashcard
@@ -115,6 +126,15 @@ struct DeckDetailView: View {
         let context = CoreDataStack.shared.context
         context.delete(flashcard)
         saveContext()
+    }
+    
+    // Function to delete selected flashcard
+    private func deleteFlashcard(at offsets: IndexSet) {
+        withAnimation {
+            offsets.map { flashcards[$0] }.forEach { flashcard in
+                deleteFlashcard(flashcard: flashcard)
+            }
+        }
     }
     
     // Save context function for Core Data
@@ -125,5 +145,14 @@ struct DeckDetailView: View {
         } catch {
             print("Failed to save context: \(error)")
         }
+    }
+    
+    // Function to convert Core Data flashcard to FlashcardDataModel (Firestore model)
+    private func convertToFlashcardDataModel(flashcard: FlashCard) -> FlashcardDataModel {
+        return FlashcardDataModel(
+            id: flashcard.id?.uuidString ?? UUID().uuidString,
+            frontText: flashcard.frontText ?? "No Front Text",
+            backText: flashcard.backText ?? "No Back Text"
+        )
     }
 }
